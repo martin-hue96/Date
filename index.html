@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <title>💘</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -41,14 +40,14 @@
 
     .buttons {
       margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
       position: relative;
       width: 100%;
       max-width: 400px;
-      height: 120px;
+      height: 200px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     button {
@@ -59,19 +58,20 @@
       cursor: pointer;
       transition: 0.2s ease;
       color: white;
-      position: relative;
+      font-weight: bold;
     }
 
     #yes {
       background: #ff4d6d;
-    }
-
-    #yes:hover {
-      transform: scale(1.1);
+      z-index: 2;
     }
 
     #no {
       background: #6c757d;
+      position: absolute;
+      left: 220px;
+      top: 80px;
+      transition: 0.12s linear;
     }
 
     /* POPUPS */
@@ -85,7 +85,6 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.6);
-
       justify-content: center;
       align-items: center;
       padding: 15px;
@@ -100,10 +99,9 @@
       width: 100%;
       max-width: 380px;
       text-align: center;
-      animation: fadeIn 0.4s ease;
     }
 
-    /* MOOD CARDS */
+    /* MOOD */
 
     .mood-options {
       display: grid;
@@ -118,13 +116,10 @@
       padding: 18px;
       border-radius: 20px;
       cursor: pointer;
-      transition: 0.25s ease;
       font-size: 30px;
-
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
     }
 
     .mood-card span {
@@ -132,36 +127,12 @@
       font-weight: bold;
     }
 
-    .mood-card:hover {
-      transform: scale(1.08);
-      background: #ffccd5;
-    }
-
     .mood-card.active {
       background: #ff4d6d;
       color: white;
-      transform: scale(1.08);
     }
 
     /* INPUTS */
-
-    .date-time-box {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .input-box {
-      text-align: left;
-      margin-top: 15px;
-    }
-
-    .input-box label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
 
     .input-box input,
     .custom-select {
@@ -177,6 +148,10 @@
     #confirm {
       background: #ff4d6d;
       margin-top: 25px;
+      padding: 12px 20px;
+      border-radius: 50px;
+      color: white;
+      border: none;
     }
 
     /* HEARTS */
@@ -190,25 +165,13 @@
     }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-
-      100% {
-        transform: translateY(-100vh) scale(1.5);
-        opacity: 0;
-      }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .celebrate {
@@ -216,388 +179,182 @@
     }
 
     @keyframes zoomIn {
-      from {
-        transform: scale(0);
-      }
-
-      to {
-        transform: scale(1);
-      }
-    }
-
-    footer {
-      margin-top: auto;
-      padding: 15px;
-      color: black;
-      font-weight: bold;
-      font-size: 14px;
+      from { transform: scale(0); }
+      to { transform: scale(1); }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Дали сакаш да дојдам? 💖</h1>
+<h1>Дали сакаш да дојдам? 💖</h1>
 
-  <img src="avt.jpg" alt="avto">
+<img src="avt.jpg">
 
-  <div class="buttons">
-    <button id="yes">Да 💕</button>
-    <button id="no">Не 😢</button>
-  </div>
+<div class="buttons">
+  <button id="yes">Да 💕</button>
+  <button id="no">Не 😢</button>
+</div>
 
-  <!-- FIRST POPUP -->
+<!-- POPUP 1 -->
+<div id="popup" class="popup">
+  <div class="popup-content">
 
-  <div id="popup" class="popup">
+    <h2>Во кој mood си? 💖</h2>
 
-    <div class="popup-content">
-
-      <h2>Во кој mood си? 💖</h2>
-
-      <div class="mood-options">
-
-        <div class="mood-card" data-mood="🍔 Храна">
-          🍔
-          <span>Храна</span>
-        </div>
-
-        <div class="mood-card" data-mood="🎬 Netflix">
-          🎬
-          <span>Netflix</span>
-        </div>
-
-        <div class="mood-card" data-mood="💕 Sex">
-          💕
-          <span>Sex</span>
-        </div>
-
-      </div>
-
-      <button id="next">Следно 💕</button>
-
+    <div class="mood-options">
+      <div class="mood-card" data-mood="🍔 Храна">🍔<span>Храна</span></div>
+      <div class="mood-card" data-mood="🎬 Netflix">🎬<span>Netflix</span></div>
+      <div class="mood-card" data-mood="💕 Sex">💕<span>Sex</span></div>
     </div>
 
+    <button id="next">Следно 💕</button>
   </div>
+</div>
 
-  <!-- SECOND POPUP -->
+<!-- POPUP 2 -->
+<div id="popup2" class="popup">
+  <div class="popup-content">
 
-  <div id="popup2" class="popup">
+    <h2>Детали 💖</h2>
 
-    <div class="popup-content">
+    <div id="extra-options"></div>
 
-      <h2>Детали 💖</h2>
+    <input type="date" id="date" style="margin-top:10px;">
+    <input type="time" id="time" style="margin-top:10px;">
 
-      <div id="extra-options"></div>
-
-      <div class="date-time-box">
-
-        <div class="input-box">
-          <label>📅 Датум</label>
-          <input type="date" id="date">
-        </div>
-
-        <div class="input-box">
-          <label>⏰ Време</label>
-          <input type="time" id="time">
-        </div>
-
-      </div>
-
-      <button id="confirm">Потврди 💕</button>
-
-    </div>
-
+    <button id="confirm">Потврди 💕</button>
   </div>
+</div>
 
-  <footer>
-    Copyright © 2026 Design by Martin
-  </footer>
+<script>
 
-  <script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+const popup = document.getElementById("popup");
+const popup2 = document.getElementById("popup2");
+
+const nextBtn = document.getElementById("next");
+const confirmBtn = document.getElementById("confirm");
+
+const buttonsContainer = document.querySelector(".buttons");
+const moodCards = document.querySelectorAll(".mood-card");
+const extraOptions = document.getElementById("extra-options");
+
+let selectedMood = "";
+let textIndex = 0;
 
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-
-    const popup = document.getElementById("popup");
-    const popup2 = document.getElementById("popup2");
-
-    const nextBtn = document.getElementById("next");
-    const confirmBtn = document.getElementById("confirm");
-
-    const buttonsContainer = document.querySelector(".buttons");
-
-    const moodCards = document.querySelectorAll(".mood-card");
-
-    const extraOptions = document.getElementById("extra-options");
-
-    let selectedMood = "";
-
-    const noTexts = [
-      "Не 😢",
-      "Неее 😭",
-      "Зашто? 🥺",
-      "Дали си сигурна? 😳",
-      "Размисли па 💔",
-      "Стварно?? 😩",
-      "Последна шанса😅"
-    ];
-
-    let textIndex = 0;
-
-    // SELECT MOOD
-
-    moodCards.forEach(card => {
-
-      card.addEventListener("click", () => {
-
-        moodCards.forEach(c => {
-          c.classList.remove("active");
-        });
-
-        card.classList.add("active");
-
-        selectedMood = card.dataset.mood;
-
-      });
-
-    });
-
-    // MOVE NO BUTTON
-
-    function moveButton() {
-
-      const maxX = buttonsContainer.offsetWidth - noBtn.offsetWidth;
-      const maxY = buttonsContainer.offsetHeight - noBtn.offsetHeight;
-
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
-
-      noBtn.style.position = "absolute";
-      noBtn.style.left = randomX + "px";
-      noBtn.style.top = randomY + "px";
-
-      textIndex = (textIndex + 1) % noTexts.length;
-
-      noBtn.innerHTML = noTexts[textIndex];
-
-      const currentSize =
-        parseFloat(window.getComputedStyle(yesBtn).fontSize);
-
-      yesBtn.style.fontSize = currentSize + 2 + "px";
-    }
-
-    // DESKTOP
-
-    noBtn.addEventListener("mouseover", moveButton);
-
-    // MOBILE
-
-    noBtn.addEventListener("touchstart", moveButton);
-
-    // YES BUTTON
-
-    yesBtn.addEventListener("click", () => {
-
-      popup.style.display = "flex";
-
-    });
-
-    // NEXT BUTTON
-
-    nextBtn.addEventListener("click", () => {
-
-      if (selectedMood === "") {
-
-        alert("Избери mood 😄");
-
-        return;
-      }
-
-      popup.style.display = "none";
-
-      popup2.style.display = "flex";
-
-      // FOOD
-
-      if (selectedMood.includes("Храна")) {
-
-        extraOptions.innerHTML = `
-
-          <div class="input-box">
-
-            <label>🍕 Каква храна?</label>
-
-            <select id="foodType" class="custom-select">
-              <option>🍕 Pizza</option>
-              <option>🍔 Burger</option>
-              <option>🌮 Taco</option>
-              <option>🍣 Sushi</option>
-              <option>🥩 Steak</option>
-            </select>
-
-          </div>
-
-        `;
-      }
-
-      // NETFLIX
-
-      else if (selectedMood.includes("Netflix")) {
-
-        extraOptions.innerHTML = `
-
-          <div class="input-box">
-
-            <label>🎬 Кој филм/серија?</label>
-
-            <input
-              type="text"
-              id="movieName"
-              placeholder="Пример: Titanic 😄"
-            >
-
-          </div>
-
-        `;
-      }
-
-      // SEX
-
-      else if (selectedMood.includes("Sex")) {
-
-        extraOptions.innerHTML = `
-
-          <div class="input-box">
-
-            <label>💕 Protection mode?</label>
-
-            <select id="protection" class="custom-select">
-              <option>🛡️ Со заштита</option>
-              <option>😅 Без заштита</option>
-            </select>
-
-          </div>
-
-        `;
-      }
-
-    });
-
-    // CONFIRM BUTTON
-
-    confirmBtn.addEventListener("click", () => {
-
-      const date = document.getElementById("date").value;
-
-      const time = document.getElementById("time").value;
-
-      if (date === "" || time === "") {
-
-        alert("Избери датум и време 💖");
-
-        return;
-      }
-
-      let extraText = "";
-
-      // FOOD
-
-      if (selectedMood.includes("Храна")) {
-
-        const food =
-          document.getElementById("foodType").value;
-
-        extraText = `🍽️ ${food}`;
-      }
-
-      // NETFLIX
-
-      else if (selectedMood.includes("Netflix")) {
-
-        const movie =
-          document.getElementById("movieName").value;
-
-        extraText = `🎥 ${movie}`;
-      }
-
-      // SEX
-
-      else if (selectedMood.includes("Sex")) {
-
-        const protection =
-          document.getElementById("protection").value;
-
-        extraText = `${protection}`;
-      }
-
-      document.body.innerHTML = `
-
-        <h1 class="celebrate">
-
-          YAYYYY!!! 💘🥰 <br><br>
-
-          Mood: ${selectedMood} <br><br>
-
-          ${extraText} <br><br>
-
-          📅 ${date} <br>
-          ⏰ ${time} 💕
-
-        </h1>
-
-        <img 
-          src="gif.gif"
-          style="
-            width:90%;
-            max-width:350px;
-            border-radius:20px;
-            margin-top:20px;
-          "
-        >
-
-      `;
-
-      createHeartsExplosion();
-
-    });
-
-    // HEARTS
-
-    function createHearts() {
-
-      const heart = document.createElement("div");
-
-      heart.classList.add("heart");
-
-      heart.innerHTML = "💖";
-
-      heart.style.left = Math.random() * 100 + "vw";
-
-      heart.style.fontSize =
-        (Math.random() * 25 + 15) + "px";
-
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-
-        heart.remove();
-
-      }, 6000);
-    }
-
-    function createHeartsExplosion() {
-
-      for (let i = 0; i < 70; i++) {
-
-        createHearts();
-
-      }
-    }
-
-    setInterval(createHearts, 300);
-
-  </script>
+const noTexts = ["Не 😢","Неее 😭","Зашто? 🥺","Стварно?? 😩","Последна шанса😅"];
+
+/* MOOD SELECT */
+moodCards.forEach(card => {
+  card.onclick = () => {
+    moodCards.forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+    selectedMood = card.dataset.mood;
+  };
+});
+
+/* MOVE NO BUTTON (FIXED MOBILE + FAST) */
+function moveButton() {
+
+  const yesRect = yesBtn.getBoundingClientRect();
+  const containerRect = buttonsContainer.getBoundingClientRect();
+
+  const range = 140;
+
+  let x = (yesRect.left - containerRect.left) + (Math.random() * range - range/2);
+  let y = (yesRect.top - containerRect.top) + (Math.random() * range - range/2);
+
+  x = Math.max(0, Math.min(x, buttonsContainer.offsetWidth - noBtn.offsetWidth));
+  y = Math.max(0, Math.min(y, buttonsContainer.offsetHeight - noBtn.offsetHeight));
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  textIndex = (textIndex + 1) % noTexts.length;
+  noBtn.innerHTML = noTexts[textIndex];
+
+  yesBtn.style.fontSize =
+    (parseFloat(getComputedStyle(yesBtn).fontSize) + 1) + "px";
+}
+
+/* DESKTOP */
+noBtn.addEventListener("mouseenter", moveButton);
+
+/* MOBILE FIX - instant reaction */
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  moveButton();
+});
+
+/* EXTRA MOBILE tracking */
+document.addEventListener("touchmove", (e) => {
+  const t = e.touches[0];
+  const el = document.elementFromPoint(t.clientX, t.clientY);
+  if (el && el.id === "no") moveButton();
+}, { passive:false });
+
+/* YES */
+yesBtn.onclick = () => popup.style.display = "flex";
+
+/* NEXT */
+nextBtn.onclick = () => {
+
+  if (!selectedMood) return alert("Избери mood 😄");
+
+  popup.style.display = "none";
+  popup2.style.display = "flex";
+
+  if (selectedMood.includes("Храна")) {
+    extraOptions.innerHTML = `
+      <label>🍔 Што јадеме?</label>
+      <select class="custom-select">
+        <option>Pizza</option>
+        <option>Burger</option>
+        <option>Sushi</option>
+      </select>
+    `;
+  }
+
+  else if (selectedMood.includes("Netflix")) {
+    extraOptions.innerHTML = `
+      <label>🎬 Филм?</label>
+      <input type="text" placeholder="Напиши филм...">
+    `;
+  }
+
+  else if (selectedMood.includes("Sex")) {
+    extraOptions.innerHTML = `
+      <label>💕 Mode</label>
+      <select class="custom-select">
+        <option>Со заштита 🛡️</option>
+        <option>Без заштита 😅</option>
+      </select>
+    `;
+  }
+};
+
+/* CONFIRM */
+confirmBtn.onclick = () => {
+
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+
+  if (!date || !time) return alert("Избери дата и време 💖");
+
+  document.body.innerHTML = `
+    <h1 class="celebrate">
+      💘 Done!<br><br>
+      ${selectedMood}<br>
+      📅 ${date}<br>
+      ⏰ ${time}
+    </h1>
+  `;
+};
+
+</script>
 
 </body>
-
 </html>
